@@ -7,52 +7,51 @@ import java.util.List;
 
 public class Main4 {
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws InterruptedException {
 
 
         // Lista som primtalen kommer att sparas i.
-        List<Integer> onlyPrimeNumbers = new ArrayList<>();
+        List<Integer> prime = new ArrayList<>();
 
         // Lambdatråd 1 som loopar igenom från 0-350_000 och adderar primtalen till listan.
-
         Thread threadOne = new Thread(() -> {
-            int i, j, count = 0;
-            for (i = 0; i <= 350_000; i++) {
-                for (j = 1; j <= i; j++) {
-                    if (i % j == 0)
-                        count++;
+            for (int i = 0; i <= 350_000; i++) {
+                if (isPrime(i)) {
+                    prime.add(i);
                 }
-                if (count == 2)
-                    onlyPrimeNumbers.add(i);
-                count = 0;
             }
-        });
-
+        }
+        );
 
         // Lambdatråd 2 som har samma logik som ovan fast räknar från 350_001 till 500_000, adderar till listan och
-        // printar ut antalet primtal.
         Thread threadTwo = new Thread(() -> {
-            int i, j, count = 0;
-            for (i = 350_001; i <= 500_000; i++) {
-                for (j = 1; j <= i; j++) {
-                    if (i % j == 0)
-                        count++;
+            for (int i = 350_001; i <= 500_000; i++) {
+                if (isPrime(i)) {
+                    prime.add(i);
                 }
-                if (count == 2)
-                    onlyPrimeNumbers.add(i);
-                count = 0;
             }
-            System.out.println("Trådarna innehåller " + onlyPrimeNumbers.size() + " primtal");
-        });
+            System.out.println(prime.size());
+        }
+        );
 
-        // Startar båda trådarna.
-        // Extremt ineffektiv, men ska ge ett resultat på 41538.
+        // Triggar trådarna.
         threadOne.start();
+        threadOne.join();
         threadTwo.start();
 
 
+    }
 
 
+    public static boolean isPrime(int n) {
+        if (n <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
