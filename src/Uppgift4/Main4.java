@@ -7,18 +7,18 @@ import java.util.List;
 
 public class Main4 {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
 
 
         // Lista som primtalen kommer att sparas i.
         List<Integer> onlyPrimeNumbers = new ArrayList<>();
 
-        // Lambdatråd 1 som loopar igenom från 2-350_000 då 0 och 1 per automatik inte är primtal
-        // och addar sedan primtalen till listan.
+        // Lambdatråd 1 som loopar igenom från 0-350_000 och adderar primtalen till listan.
+
         Thread threadOne = new Thread(() -> {
             int i, j, count = 0;
-            for (i = 2; i <= 350_000; i++) {
+            for (i = 0; i <= 350_000; i++) {
                 for (j = 1; j <= i; j++) {
                     if (i % j == 0)
                         count++;
@@ -50,6 +50,8 @@ public class Main4 {
         // Extremt ineffektiv, men ska ge ett resultat på 41538.
         threadOne.start();
         threadTwo.start();
+
+
 
 
     }
