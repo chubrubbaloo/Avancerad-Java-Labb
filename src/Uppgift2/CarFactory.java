@@ -8,6 +8,7 @@ public class CarFactory {
             case HATCHBACK -> new Honda();
             case SUV -> new Toyota();
         };
+
     }
 
 }

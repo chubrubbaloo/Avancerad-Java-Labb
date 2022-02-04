@@ -1,8 +1,4 @@
-package com.company;
-
-import Uppgift2.Car;
-import Uppgift2.CarFactory;
-import Uppgift2.CarType;
+package Uppgift1;
 
 import java.util.List;
 
